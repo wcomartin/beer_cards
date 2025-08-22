@@ -12,14 +12,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 # This must be *before* running flask db upgrade
 COPY . .
 
-# Run database migrations
-ENV FLASK_APP=app.py
-# Set FLASK_APP for the migration command
-RUN flask db upgrade
+# Copy the startup script and make it executable
+COPY start.sh .
+RUN chmod +x start.sh
 
 # Expose the port that Gunicorn will listen on
 EXPOSE 8000
 
-# Run the application using Gunicorn
-# The 'app:app' refers to the 'app' instance within 'app.py'
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]
+# Run the startup script
+CMD ["./start.sh"]
