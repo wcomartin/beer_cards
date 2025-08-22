@@ -5,7 +5,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Beers</h1>
+    <div class="header-container">
+        <h1>Beers</h1>
+        <div class="header-buttons">
+            <a href="{{ url_for('beer_import') }}" class="button">Import Beers</a>
+            <a href="{{ url_for('beer_print') }}" class="button">Print Beers (HTML)</a>
+        </div>
+    </div>
     <table>
         <thead>
             <tr>
