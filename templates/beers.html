@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Beers</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Beers</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Beer Type</th>
+                <th>Style</th>
+                <th>Country</th>
+                <th>Description</th>
+                <th>IBU</th>
+                <th>ABV</th>
+                <th>Card Action</th>
+                <th>Hops</th>
+                <th>Grains</th>
+                <th>Yeast</th>
+                <th>Water</th>
+                <th>Special</th>
+                <th>Group Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for beer in beers %}
+            <tr>
+                <td>{{ beer.id }}</td>
+                <td>{{ beer.beer_type }}</td>
+                <td>{{ beer.style }}</td>
+                <td>{{ beer.country }}</td>
+                <td>{{ beer.description }}</td>
+                <td>{{ beer.ibu }}</td>
+                <td>{{ beer.abv }}</td>
+                <td>{{ beer.card_action }}</td>
+                <td>{{ beer.hops }}</td>
+                <td>{{ beer.grains }}</td>
+                <td>{{ beer.yeast }}</td>
+                <td>{{ beer.water }}</td>
+                <td>{{ beer.special }}</td>
+                <td>{{ beer.group_action }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

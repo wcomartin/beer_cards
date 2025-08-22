@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Beer Print</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/card.css') }}">
+</head>
+<body>
+    {% for page in beers|batch(9) %}
+    <div class="page">
+        {% for beer in page %}
+        <div class="card">
+            <div class="card-header">
+                <h2 class="beer-type">{{ beer.beer_type }}</h2>
+                <div class="beer-stats">
+                    <span class="card-id">{{ "%03d"|format(beer.id) }}</span>
+                    <!-- <span class="ibu">IBU: {% if beer.ibu == beer.ibu|int %}{{ beer.ibu|int }}{% else %}{{ beer.ibu }}{% endif %}</span> -->
+                    <span class="country-style">{{ beer.country }} - {{ beer.style }}</span>
+                </div>
+            </div>
+            
+            <div class="ingredients-section">
+                <div class="ingredients-list">
+                    <p><span class="ingredient-icon hops">H</span> <span class="ingredient-value">{{ beer.hops }}</span></p>
+                    <p><span class="ingredient-icon grains">G</span> <span class="ingredient-value">{{ beer.grains }}</span></p>
+                    <p><span class="ingredient-icon yeast">Y</span> <span class="ingredient-value">{{ beer.yeast }}</span></p>
+                    <p><span class="ingredient-icon water">W</span> <span class="ingredient-value">{{ beer.water }}</span></p>
+                    <p><span class="ingredient-icon special">S</span> <span class="ingredient-value">{{ beer.special }}</span></p>
+                </div>
+                <div class="beer-details">
+                    <p class="card-description">{{ beer.description }}</p>
+                    <div class="beer-image-placeholder"></div>
+                </div>
+            </div>
+            <div class="card-actions">
+                <p class="card-action-text">{{ beer.card_action }}</p>
+                <p class="card-action-text">{{ beer.group_action }}</p>
+            </div>
+            <div class="card-footer">
+                <span class="footer-ibu">+{% if beer.ibu == beer.ibu|int %}{{ beer.ibu|int }}{% else %}{{ beer.ibu }}{% endif %} IBU</span>
+                <span class="footer-abv">{% if beer.abv == beer.abv|int %}{{ beer.abv|int }}{% else %}{{ beer.abv }}{% endif %} ABV</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}</body>
+</html>
