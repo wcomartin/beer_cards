@@ -1,4 +1,3 @@
-
 body {
     font-family: sans-serif;
     background-color: #f4f4f4;
@@ -116,20 +115,201 @@ input[type="submit"]:hover {
     gap: 10px; /* Space between buttons */
 }
 
-/* General button styling */
+/* General button styling - REFINED for navigation links */
 .button {
-    background-color: #007bff; /* Blue color for buttons */
-    color: white;
-    padding: 8px 15px;
-    border: none;
+    background-color: transparent; /* No background */
+    color: white; /* Text color */
+    padding: 8px 15px; /* Keep some padding for click area */
+    border: none; /* No border */
     border-radius: 5px;
     text-decoration: none; /* Remove underline from links */
     font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
     white-space: nowrap; /* Prevent text from wrapping */
 }
 
 .button:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle background on hover */
+    color: #f0f0f0; /* Slightly lighter text on hover */
+}
+
+/* Navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.navbar-left h1 {
+    margin: 0;
+    color: white;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Dropdown Button - REFINED */
+.dropbtn {
+    background-color: transparent; /* No background */
+    color: white; /* Text color */
+    padding: 8px 15px; /* Keep some padding for click area */
+    font-size: 14px;
+    border: none; /* No border */
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+}
+
+.dropbtn:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle background on hover */
+    color: #f0f0f0; /* Slightly lighter text on hover */
+}
+
+/* Dropdown Content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    overflow: hidden; /* Ensures rounded corners apply to children */
+    right: 20px; /* Align to the right of the navbar */
+    top: 60px; /* Position below the navbar */
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Arrow for dropdown */
+.arrow {
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+/* Form styling - General modern look */
+form {
+    margin-top: 30px; /* More space from top */
+    padding: 30px; /* More internal padding */
+    border: none; /* Remove border */
+    background-color: #ffffff; /* White background */
+    border-radius: 10px; /* More rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer, larger shadow */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* More space between elements */
+    max-width: 400px; /* Slightly narrower form */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px; /* Space between label and input */
+    display: block; /* Ensure label takes full width */
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+    width: calc(100% - 20px); /* Adjust width for padding */
+    padding: 12px 10px; /* More padding */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 5px; /* Rounded input fields */
+    font-size: 16px;
+    box-sizing: border-box; /* Include padding in width */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus {
+    border-color: #007bff; /* Highlight on focus */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Subtle glow on focus */
+    outline: none; /* Remove default outline */
+}
+
+form input[type="submit"] {
+    background-color: #007bff; /* Primary blue color */
+    color: white;
+    padding: 12px 20px; /* More padding */
+    border: none;
+    border-radius: 5px; /* Rounded button */
+    cursor: pointer;
+    font-size: 18px; /* Larger text */
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    margin-top: 10px; /* Space above submit button */
+}
+
+form input[type="submit"]:hover {
     background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-1px); /* Slight lift effect */
+}
+
+/* Specific styling for remember me checkbox */
+form label[for="remember"] {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+form input[type="checkbox"] {
+    margin-right: 8px;
+    width: auto; /* Reset width for checkbox */
+    padding: 0; /* Reset padding for checkbox */
+}
+
+/* Adjustments for links below form */
+form + p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+form + p a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+form + p a:hover {
+    text-decoration: underline;
 }

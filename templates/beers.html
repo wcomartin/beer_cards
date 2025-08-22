@@ -5,11 +5,23 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <div class="header-container">
-        <h1>Beers</h1>
-        <div class="header-buttons">
-            <a href="{{ url_for('beer_import') }}" class="button">Import Beers</a>
-            <a href="{{ url_for('beer_print') }}" class="button">Print Beers (HTML)</a>
+    <div class="navbar">
+        <div class="navbar-left">
+            <h1>Beers</h1>
+        </div>
+        <div class="navbar-right">
+            <a href="{{ url_for('beer_bp.beer_import') }}" class="button">Import Beers</a>
+            <a href="{{ url_for('beer_bp.beer_print') }}" class="button">Print Beers (HTML)</a>
+            
+            <div class="dropdown">
+                <button class="button dropbtn">User <i class="arrow down"></i></button>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('auth_bp.change_password') }}">Change Password</a>
+                    <a href="{{ url_for('auth_bp.logout') }}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
         </div>
     </div>
     <table>

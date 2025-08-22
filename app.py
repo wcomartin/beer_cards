@@ -1,54 +1,33 @@
 from flask import Flask, render_template, make_response, request, flash, redirect, url_for
-from flask_migrate import Migrate # Added this import
+from flask_migrate import Migrate
+from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 import os
 from importer import import_csv
 
 from database import db
+from models import Beer, User
+from datetime import datetime
+
+from blueprints.beer import beer_bp # Import beer blueprint
+from blueprints.auth import auth_bp # Import auth blueprint
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-app.secret_key = 'a_very_secret_key' # You should change this to a strong, random key in production
+app.secret_key = 'a_very_secret_key'
 db.init_app(app)
-migrate = Migrate(app, db) # Added this line
+migrate = Migrate(app, db)
 
-from models import Beer
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'auth_bp.login' # Set the login view to blueprint's login
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
-
-@app.route('/')
-def index():
-    beers = Beer.query.all()
-    return render_template('beers.html', beers=beers)
-
-@app.route('/beers/print')
-def beer_print():
-    beers = Beer.query.all()
-    return render_template('beer_print.html', beers=beers)
-
-
-
-@app.route('/beer/import', methods=['GET', 'POST'])
-def beer_import():
-    if request.method == 'POST':
-        if 'csv_file' not in request.files:
-            flash('No file part', 'error')
-            return redirect(request.url)
-        csv_file = request.files['csv_file']
-        if csv_file.filename == '':
-            flash('No selected file', 'error')
-            return redirect(request.url)
-        if csv_file and csv_file.filename.endswith('.csv'):
-            try:
-                import_csv(csv_file.stream)
-                flash('CSV imported successfully!', 'success')
-                return redirect(url_for('index'))
-            except Exception as e:
-                flash(f'Error importing CSV: {e}', 'error')
-                return redirect(request.url)
-        else:
-            flash('Invalid file type. Please upload a CSV file.', 'error')
-            return redirect(request.url)
-    return render_template('import_beers.html')
+# Register blueprints
+app.register_blueprint(beer_bp)
+app.register_blueprint(auth_bp)
 
 if __name__ == '__main__':
     app.run(debug=True)

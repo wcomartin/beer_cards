@@ -12,7 +12,7 @@ services:
       # Set Flask environment variables if needed
       FLASK_APP: app.py
       FLASK_ENV: development # Or 'production' for production environment
-    command: gunicorn --bind 0.0.0.0:8000 app:app # Use Gunicorn to run the app
+    command: sh -c "python seed_admin.py && gunicorn --bind 0.0.0.0:8000 --reload app:app"
 
 volumes:
   beer_db_data: # Define the named volume for database persistence
