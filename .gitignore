@@ -41,3 +41,4 @@ Thumbs.db
 
 # Specific to this project
 instance/test.db
+beers.csv
