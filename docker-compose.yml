@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app # Mount the current directory into the container for development
+      - beer_db_data:/app/instance # Persist the database file
+    environment:
+      # Set Flask environment variables if needed
+      FLASK_APP: app.py
+      FLASK_ENV: development # Or 'production' for production environment
+    command: gunicorn --bind 0.0.0.0:8000 app:app # Use Gunicorn to run the app
+
+volumes:
+  beer_db_data: # Define the named volume for database persistence

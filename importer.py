@@ -2,13 +2,12 @@ import csv
 import io # Added import io
 from models import Beer
 
-def import_csv(filename_or_file_object):
+def import_csv(file_object):
     from app import db, app
+
     with app.app_context():
-        if isinstance(filename_or_file_object, str):
-            f = open(filename_or_file_object, 'r', encoding='utf-8') # Added encoding
-        else:
-            f = io.TextIOWrapper(filename_or_file_object, encoding='utf-8') # Wrapped in TextIOWrapper
+        csv_content = file_object.read().decode('utf-8')
+        f = io.StringIO(csv_content)
 
         reader = csv.reader(f)
         next(reader)
@@ -52,5 +51,7 @@ def import_csv(filename_or_file_object):
                 db.session.add(beer)
         db.session.commit()
 
-        if isinstance(filename_or_file_object, str):
-            f.close()
+if __name__ == '__main__':
+    # For testing, open the file and pass the file object
+    with open('beers.csv', 'rb') as f:
+        import_csv(f)
