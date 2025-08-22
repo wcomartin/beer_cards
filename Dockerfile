@@ -4,12 +4,18 @@ FROM python:3.10-slim-bullseye
 # Set the working directory in the container
 WORKDIR /app
 
-# Install any needed packages specified in requirements.txt
+# Copy requirements.txt and install dependencies first
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code into the container
+# This must be *before* running flask db upgrade
 COPY . .
+
+# Run database migrations
+ENV FLASK_APP=app.py
+# Set FLASK_APP for the migration command
+RUN flask db upgrade
 
 # Expose the port that Gunicorn will listen on
 EXPOSE 8000

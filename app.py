@@ -1,4 +1,5 @@
 from flask import Flask, render_template, make_response, request, flash, redirect, url_for
+from flask_migrate import Migrate # Added this import
 import os
 from importer import import_csv
 
@@ -8,12 +9,11 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.secret_key = 'a_very_secret_key' # You should change this to a strong, random key in production
 db.init_app(app)
+migrate = Migrate(app, db) # Added this line
 
 from models import Beer
 
-with app.app_context():
-    db.drop_all()
-    db.create_all()
+
 
 @app.route('/')
 def index():
