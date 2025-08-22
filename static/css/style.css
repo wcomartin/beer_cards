@@ -313,3 +313,16 @@ form + p a {
 form + p a:hover {
     text-decoration: underline;
 }
+
+/* Specific styling for buttons inside table cells */
+td .button {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    padding: 5px 10px; /* Smaller padding for table */
+    font-size: 12px; /* Smaller font size */
+    border-radius: 3px; /* Slightly less rounded */
+}
+
+td .button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}

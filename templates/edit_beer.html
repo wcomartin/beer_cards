@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Beer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Edit Beer (ID: {{ beer.id }})</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <form method="POST">
+        <label for="beer_type">Beer Type:</label>
+        <input type="text" id="beer_type" name="beer_type" value="{{ beer.beer_type }}" required>
+
+        <label for="style">Style:</label>
+        <input type="text" id="style" name="style" value="{{ beer.style }}" required>
+
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" value="{{ beer.country }}" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="5" required>{{ beer.description }}</textarea>
+
+        <label for="ibu">IBU:</label>
+        <input type="number" step="0.1" id="ibu" name="ibu" value="{{ beer.ibu }}">
+
+        <label for="abv">ABV:</label>
+        <input type="number" step="0.1" id="abv" name="abv" value="{{ beer.abv }}">
+
+        <label for="card_action">Card Action:</label>
+        <textarea id="card_action" name="card_action" rows="3" required>{{ beer.card_action }}</textarea>
+
+        <label for="hops">Hops:</label>
+        <input type="number" id="hops" name="hops" value="{{ beer.hops }}">
+
+        <label for="grains">Grains:</label>
+        <input type="number" id="grains" name="grains" value="{{ beer.grains }}">
+
+        <label for="yeast">Yeast:</label>
+        <input type="number" id="yeast" name="yeast" value="{{ beer.yeast }}">
+
+        <label for="water">Water:</label>
+        <input type="number" id="water" name="water" value="{{ beer.water }}">
+
+        <label for="special">Special:</label>
+        <input type="number" id="special" name="special" value="{{ beer.special }}">
+
+        <label for="group_action">Group Action:</label>
+        <textarea id="group_action" name="group_action" rows="3" required>{{ beer.group_action }}</textarea>
+
+        <input type="submit" value="Update Beer">
+    </form>
+    <p><a href="{{ url_for('beer_bp.index') }}">Back to Beer List</a></p>
+</body>
+</html>

@@ -41,6 +41,7 @@
                 <th>Water</th>
                 <th>Special</th>
                 <th>Group Action</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -60,6 +61,7 @@
                 <td>{{ beer.water }}</td>
                 <td>{{ beer.special }}</td>
                 <td>{{ beer.group_action }}</td>
+                <td><a href="{{ url_for('beer_bp.edit_beer', beer_id=beer.id) }}" class="button">Edit</a></td>
             </tr>
             {% endfor %}
         </tbody>
